@@ -12,5 +12,18 @@ const addData = async (formValues: any) => {
     console.log("error");
   }
 };
+const getData = async () => {
+  try {
+    const list: any = [];
+    const colRef = collection(db, "applicants");
+    const docsSnap = await getDocs(colRef);
+    docsSnap.forEach((doc: any) => {
+      list.push(doc.data());
+    });
+    return list;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-export { addData };
+export { addData, getData };
